@@ -13,8 +13,24 @@ def encoder(decoded_string):
 
 
 def decoder(encoded_string):
-    decode = [int(i) + 3 for i in encoded_list]
-    return f"The encoded password is {encoded_string}, and the original password is {''.join(decode)}."
+    decoded = []
+    count = 0
+    for number in encoded_string:
+        number = int(number)
+        if number >= 3:
+            decoded.append(number - 3)
+            continue
+        while True:
+            number -= 1
+            count += 1
+            if number < 0:
+                number = 9
+            if count == 3:
+                decoded.append(number)
+                count = 0
+                break
+    result = [str(i) for i in decoded]
+    return f"The encoded password is {encoded_string}, and the original password is {''.join(result)}."
 
 
 def main():
